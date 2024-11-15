@@ -2,7 +2,9 @@ package com.parking.demo.entities;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "user")
@@ -54,15 +56,14 @@ public class User {
 
     private String password;
 
-    @ManyToOne
-    private User owner;
+    @OneToMany(mappedBy = "owner", orphanRemoval = true)
+    private List<Car> cars = new ArrayList<>();
 
-    public User getOwner() {
-        return owner;
+    public List<Car> getCars() {
+        return cars;
     }
 
-    public void setOwner(User owner) {
-        this.owner = owner;
+    public void setCars(List<Car> cars) {
+        this.cars = cars;
     }
-
 }

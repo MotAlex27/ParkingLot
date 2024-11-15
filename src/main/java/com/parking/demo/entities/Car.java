@@ -9,13 +9,14 @@ import java.util.Collection;
 @Table(name = "car")
 public class Car {
 
-
-    private Collection<Car> cars;
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "owner_id")
+    private User owner;
 
     public Long getId() {
         return id;
@@ -24,17 +25,6 @@ public class Car {
     public void setId(Long id) {
         this.id = id;
     }
-    @OneToMany(mappedBy = "owner")
-    public Collection<Car> getCars() {
-        return cars;
-    }
-
-    public void setCars(Collection<Car> cars) {
-        this.cars = cars;
-    }
-
-    @Column(name = "license_plate")
-    private String licensePlate;
 
     public String getParkingSpot() {
         return parkingSpot;
@@ -44,13 +34,11 @@ public class Car {
         this.parkingSpot = parkingSpot;
     }
 
-    public String getLicensePlate() {
-        return licensePlate;
-    }
+    @Column(name = "parking_spot")
+    private String parkingSpot;
 
-    public void setLicensePlate(String licensePlate) {
-        this.licensePlate = licensePlate;
-    }
+    @Column(name = "license_plate")
+    private String licensePlate;
 
     public User getOwner() {
         return owner;
@@ -60,9 +48,17 @@ public class Car {
         this.owner = owner;
     }
 
-    @Column (name = "parking_spot")
-    private String parkingSpot;
-    @ManyToOne
-    @JoinColumn(name = "owner_id", referencedColumnName = "id", nullable = false)
-    private User owner;
+
+
+    public String getLicensePlate() {
+        return licensePlate;
+    }
+
+    public void setLicensePlate(String licensePlate) {
+        this.licensePlate = licensePlate;
+    }
+
+
+
+
 }
