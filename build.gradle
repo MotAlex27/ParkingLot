@@ -23,10 +23,12 @@ tasks.withType(JavaCompile) {
 
 dependencies {
     compileOnly('jakarta.platform:jakarta.jakartaee-api:11.0.0-M3')
+    implementation 'mysql:mysql-connector-java:8.0.26'
     implementation 'org.json:json:20210307'
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
 }
+
 
 test {
     useJUnitPlatform()
