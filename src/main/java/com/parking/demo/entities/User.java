@@ -16,24 +16,32 @@ public class User {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @Column(name = "EMAIL")
+    private String email;
+
+    @Column(name = "PASSWORD")
+    private String password;
+
+    @Column(name = "username")
+    private String username;
+
+    @OneToMany(mappedBy = "owner")
+    private Collection<Car> cars = new ArrayList<>();
+
+    public Collection<Car> getCars() {
+        return cars;
+    }
+
+    public void setCars(Collection<Car> cars) {
+        this.cars = cars;
+    }
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    @Column(name = "username")
-    private String username;
-
-    @Basic
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getEmail() {
@@ -44,8 +52,6 @@ public class User {
         this.email = email;
     }
 
-    private String email;
-
     public String getPassword() {
         return password;
     }
@@ -54,16 +60,11 @@ public class User {
         this.password = password;
     }
 
-    private String password;
-
-    @OneToMany(mappedBy = "owner", orphanRemoval = true)
-    private List<Car> cars = new ArrayList<>();
-
-    public List<Car> getCars() {
-        return cars;
+    public String getUsername() {
+        return username;
     }
 
-    public void setCars(List<Car> cars) {
-        this.cars = cars;
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

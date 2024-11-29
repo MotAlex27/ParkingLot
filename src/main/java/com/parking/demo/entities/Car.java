@@ -10,12 +10,11 @@ import java.util.Collection;
 public class Car {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "owner_id")
+    @JoinColumn(name = "owner_id", foreignKey = @ForeignKey(name = "FK_car_owner_id"))
     private User owner;
 
     public Long getId() {
@@ -39,6 +38,39 @@ public class Car {
 
     @Column(name = "license_plate")
     private String licensePlate;
+
+    @Column(name = "brand")
+    private String brand;
+
+    @Column(name = "model")
+    private String model;
+
+    @Column(name = "color")
+    private String color;
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
 
     public User getOwner() {
         return owner;
