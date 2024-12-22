@@ -15,6 +15,7 @@ public class UserDto {
         this.password = password;
         this.email = email;
     }
+
     public UserDto(String username, String password,
                    String email, long id) {
         this.username = username;

@@ -1,6 +1,8 @@
 package com.parking.demo.common;
 
 public class CarsDto {
+
+    private Long id;
     private String licensePlate;
     private String brand;
     private String model;
@@ -16,6 +18,15 @@ public class CarsDto {
         this.model = model;
         this.color = color;
         this.parkingSpot = parkingSpot;
+    }
+
+    public CarsDto(Long id, String licensePlate, String brand, String model, String color, String parkingSpot) {
+        this.licensePlate = licensePlate;
+        this.brand = brand;
+        this.model = model;
+        this.color = color;
+        this.parkingSpot = parkingSpot;
+        this.id = id;
     }
 
     public String getLicensePlate() {
@@ -56,5 +67,13 @@ public class CarsDto {
 
     public void setParkingSpot(String parkingSpot) {
         this.parkingSpot = parkingSpot;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

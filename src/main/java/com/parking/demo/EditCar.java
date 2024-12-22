@@ -1,7 +1,7 @@
 package com.parking.demo;
 
-import com.parking.demo.common.UserDto;
-import com.parking.demo.ejb.UserBean;
+import com.parking.demo.common.CarsDto;
+import com.parking.demo.ejb.CarsBean;
 import jakarta.inject.Inject;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -10,21 +10,19 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.util.List;
 
-
-@WebServlet(name = "User", value = "/User")
-public class UserServlet extends HttpServlet {
-
+@WebServlet(name = "EditCar", value = "/EditCar")
+public class EditCar extends HttpServlet {
     @Inject
-    UserBean userBean;
+    CarsBean carBean;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse
             response) throws ServletException, IOException {
-        List<UserDto> users = userBean.findAllUsers();
-        request.setAttribute("users", users);
-        request.getRequestDispatcher("/WEB-INF/pages/user.jsp").forward(request,
+        Long carId = Long.parseLong(request.getParameter("id"));
+        CarsDto car = carBean.findCarById(carId);
+        request.setAttribute("car", car);
+        request.getRequestDispatcher("/WEB-INF/pages/editCar.jsp").forward(request,
                 response);
     }
 

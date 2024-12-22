@@ -17,7 +17,7 @@ public class UserBean {
             return em.createQuery("SELECT new com.parking.demo.common.UserDto" +
                     "(u.username, u.password, u.email)" +
                     " FROM User u", UserDto.class).getResultList();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }

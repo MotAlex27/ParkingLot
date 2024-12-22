@@ -24,6 +24,10 @@
                         <input type="text" class="form-control" id="color" name="color" required>
                     </div>
                     <div class="form-group">
+                        <label for="parkingSpot">parkingSpot</label>
+                        <input type="text" class="form-control" id="parkingSpot" name="parkingSpot" required>
+                    </div>
+                    <div class="form-group">
                         <label for="owner_id">Owner</label>
                         <select class="custom-select d-block w-100" id="owner_id" name="owner_id" required>
                             <option value="">Choose...</option>
@@ -34,6 +38,9 @@
                     </div>
                     <button type="submit" class="btn btn-primary">Add Car</button>
                 </form>
+                <c:if test="${not empty error}">
+                    <div class="alert alert-danger">${error}</div>
+                </c:if>
 
             </div>
         </div>

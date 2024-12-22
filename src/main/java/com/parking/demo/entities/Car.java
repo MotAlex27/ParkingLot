@@ -2,9 +2,6 @@ package com.parking.demo.entities;
 
 import jakarta.persistence.*;
 
-
-import java.util.Collection;
-
 @Entity
 @Table(name = "car")
 public class Car {
@@ -81,7 +78,6 @@ public class Car {
     }
 
 
-
     public String getLicensePlate() {
         return licensePlate;
     }
@@ -89,8 +85,6 @@ public class Car {
     public void setLicensePlate(String licensePlate) {
         this.licensePlate = licensePlate;
     }
-
-
 
 
 }
