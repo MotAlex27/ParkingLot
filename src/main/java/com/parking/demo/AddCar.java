@@ -68,7 +68,7 @@ public class AddCar extends HttpServlet {
             carsBean.createCar(licensePlate, brand, model, color, parkingSpot, ownerId);
 
             // Redirect to success page or list of cars
-            response.sendRedirect(request.getContextPath() + "/cars");
+            response.sendRedirect(request.getContextPath() + "/Cars");
 
         } catch (NumberFormatException e) {
             request.setAttribute("error", "Invalid number format: " + e.getMessage());

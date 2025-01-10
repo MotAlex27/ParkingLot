@@ -2,6 +2,7 @@ package com.parking.demo.ejb;
 
 
 import com.parking.demo.common.CarsDto;
+import com.parking.demo.common.UserDto;
 import com.parking.demo.entities.Car;
 import com.parking.demo.entities.User;
 import jakarta.ejb.Stateless;
@@ -23,6 +24,7 @@ public class CarsBean {
     }
 
     public void createCar( String licensePlate, String brand, String model, String color, String parkingSpot, Long userId) {
+
         Car car = new Car();
         car.setLicensePlate(licensePlate);
         car.setParkingSpot(parkingSpot);
@@ -31,9 +33,10 @@ public class CarsBean {
         car.setColor(color);
 
         User user = em.find(User.class, userId);
+
         user.getCars().add(car);
         car.setOwner(user);
-        em.persist(user);
+        em.persist(car);
     }
 
     public List<CarsDto> findCarsByOwnerId(Long ownerId) {
@@ -44,6 +47,13 @@ public class CarsBean {
                 .getResultList();
     }
 
+    public List<CarsDto> findCarsByOwnerUsername(String username) {
+        return em.createQuery("SELECT new com.parking.demo.common.CarsDto" +
+                        "(c.licensePlate, c.brand, c.model, c.color, c.parkingSpot)" +
+                        " FROM Car c WHERE c.owner.username = :username", CarsDto.class)
+                .setParameter("username", username)
+                .getResultList();
+    }
     public void deleteCarsById(Long carId) {
         Car car = em.find(Car.class, carId);
         em.remove(car);

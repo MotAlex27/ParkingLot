@@ -30,9 +30,9 @@
                     <div class="form-group">
                         <label for="owner_id">Owner</label>
                         <select class="custom-select d-block w-100" id="owner_id" name="owner_id" required>
-                            <option value="">Choose...</option>
+                            <option value="">Select Owner</option>
                             <c:forEach var="user" items="${users}">
-                                <option value="${user.id}" <c:if test="${user.id == owner_id}">selected</c:if>>${user.username}</option>
+                                <option value="${user.id}">${user.username}</option>
                             </c:forEach>
                         </select>
                     </div>

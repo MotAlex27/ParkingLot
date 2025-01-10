@@ -35,26 +35,37 @@ public class CarsServlet extends HttpServlet {
     @Override
     @RolesAllowed("WRITE_CARS")
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        //ASTA E DELETE
+        try {
+            String[] carIds = request.getParameterValues("car_ids");
+            if (carIds != null) {
+                for (String carId : carIds) {
+                    carsBean.deleteCarsById(Long.valueOf(carId));
+                }
+            }
+            response.sendRedirect(request.getContextPath() + "/Cars");
+        } catch (Exception e) {
+            e.printStackTrace(); // Log the error
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "An error occurred while deleting cars.");
+        }
     }
 
     @Override
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String carIdStr = request.getParameter("car_id");
         try {
-            Long carId = Long.parseLong(carIdStr);
-            carsBean.deleteCarsById(carId);
-            response.sendRedirect(request.getContextPath() + "/cars");
-        } catch (NumberFormatException e) {
-            // Handle invalid car_id
-            request.setAttribute("error", "Invalid car ID.");
-            doGet(request, response);
+            String[] carIds = request.getParameterValues("car_ids");
+            if (carIds != null) {
+                for (String carId : carIds) {
+                    carsBean.deleteCarsById(Long.valueOf(carId));
+                }
+            }
+            response.sendRedirect(request.getContextPath() + "/Cars");
         } catch (Exception e) {
-            // Handle general errors
-            request.setAttribute("error", "An error occurred while deleting the car.");
-            doGet(request, response);
+            e.printStackTrace(); // Log the error
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "An error occurred while deleting cars.");
         }
     }
+
 
     @Override
 

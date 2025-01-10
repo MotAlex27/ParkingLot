@@ -17,7 +17,7 @@ public class UserBean {
     public List<UserDto> findAllUsers() {
         try {
             return em.createQuery("SELECT new com.parking.demo.common.UserDto" +
-                    "(u.username, u.password, u.email)" +
+                    "(u.username, u.password, u.email,u.id)" +
                     " FROM User u", UserDto.class).getResultList();
         } catch (Exception e) {
             e.printStackTrace();

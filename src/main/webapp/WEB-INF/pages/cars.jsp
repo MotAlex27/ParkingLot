@@ -4,7 +4,7 @@
 <t:pageTemplate pageTitle="Cars">
     <h1>Cars</h1>
     <form action="${pageContext.request.contextPath}/Cars" method="post">
-        <a href="${pageContext.request.contextPath}/AddCar" class="btn btn-primary btn-lg">Add Car</a>
+        <a href="${pageContext.request.contextPath}/AddCar"  class="btn btn-primary btn-lg">Add Car</a>
         <button class="btn btn-danger" type="submit">Delete Cars</button>
         <div class="container">
             <form class="row">
