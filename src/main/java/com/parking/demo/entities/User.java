@@ -9,31 +9,25 @@ import java.util.Collection;
 @Table(name = "user")
 public class User {
 
-
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Or AUTO depending on your setup
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "EMAIL")
+    @Column(name = "EMAIL", nullable = false)
     private String email;
 
-    @Column(name = "PASSWORD")
+    @Column(name = "PASSWORD", nullable = false)
     private String password;
 
-    @Column(name = "username")
+    @Column(name = "username", nullable = false, unique = true)
     private String username;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Collection<UserGroup> groups = new ArrayList<>();
 
     @OneToMany(mappedBy = "owner")
     private Collection<Car> cars = new ArrayList<>();
-
-    public Collection<Car> getCars() {
-        return cars;
-    }
-
-    public void setCars(Collection<Car> cars) {
-        this.cars = cars;
-    }
 
     public Long getId() {
         return id;
@@ -65,5 +59,21 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public Collection<UserGroup> getGroups() {
+        return groups;
+    }
+
+    public void setGroups(Collection<UserGroup> groups) {
+        this.groups = groups;
+    }
+
+    public Collection<Car> getCars() {
+        return cars;
+    }
+
+    public void setCars(Collection<Car> cars) {
+        this.cars = cars;
     }
 }

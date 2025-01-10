@@ -22,9 +22,8 @@ public class CarsBean {
                 " FROM Car c", CarsDto.class).getResultList();
     }
 
-    public void createCar(Long id, String licensePlate, String brand, String model, String color, String parkingSpot, Long userId) {
+    public void createCar( String licensePlate, String brand, String model, String color, String parkingSpot, Long userId) {
         Car car = new Car();
-        car.setId(id);
         car.setLicensePlate(licensePlate);
         car.setParkingSpot(parkingSpot);
         car.setBrand(brand);

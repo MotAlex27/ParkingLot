@@ -4,6 +4,13 @@
 <t:pageTemplate pageTitle="Users">
     <h1>Users</h1>
     <div class="container">
+        <!-- Add User Button -->
+        <div class="row mb-3">
+            <div class="col-md-12">
+                <a href="${pageContext.request.contextPath}/AddUser" class="btn btn-primary">Add User</a>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-md-12">
                 <table class="table table-striped">

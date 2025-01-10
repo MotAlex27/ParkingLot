@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 public class Car {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Or AUTO depending on your setup
     @Column(name = "id", nullable = false)
     private Long id;
 

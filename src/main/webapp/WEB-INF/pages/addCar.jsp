@@ -9,30 +9,30 @@
                 <form action="${pageContext.request.contextPath}/AddCar" method="post">
                     <div class="form-group">
                         <label for="licensePlate">License Plate</label>
-                        <input type="text" class="form-control" id="licensePlate" name="licensePlate" required>
+                        <input type="text" class="form-control" id="licensePlate" name="licensePlate" value="${licensePlate}" required>
                     </div>
                     <div class="form-group">
                         <label for="brand">Brand</label>
-                        <input type="text" class="form-control" id="brand" name="brand" required>
+                        <input type="text" class="form-control" id="brand" name="brand" value="${brand}" required>
                     </div>
                     <div class="form-group">
                         <label for="model">Model</label>
-                        <input type="text" class="form-control" id="model" name="model" required>
+                        <input type="text" class="form-control" id="model" name="model" value="${model}" required>
                     </div>
                     <div class="form-group">
                         <label for="color">Color</label>
-                        <input type="text" class="form-control" id="color" name="color" required>
+                        <input type="text" class="form-control" id="color" name="color" value="${color}" required>
                     </div>
                     <div class="form-group">
-                        <label for="parkingSpot">parkingSpot</label>
-                        <input type="text" class="form-control" id="parkingSpot" name="parkingSpot" required>
+                        <label for="parkingSpot">Parking Spot</label>
+                        <input type="text" class="form-control" id="parkingSpot" name="parkingSpot" value="${parkingSpot}" required>
                     </div>
                     <div class="form-group">
                         <label for="owner_id">Owner</label>
                         <select class="custom-select d-block w-100" id="owner_id" name="owner_id" required>
                             <option value="">Choose...</option>
                             <c:forEach var="user" items="${users}">
-                                <option value="${user.id}">${user.username}</option>
+                                <option value="${user.id}" <c:if test="${user.id == owner_id}">selected</c:if>>${user.username}</option>
                             </c:forEach>
                         </select>
                     </div>
@@ -41,16 +41,28 @@
                 <c:if test="${not empty error}">
                     <div class="alert alert-danger">${error}</div>
                 </c:if>
-
+                <c:if test="${not empty id}">
+                    <div class="alert alert-info">id: ${id}</div>
+                </c:if>
+                <c:if test="${not empty licensePlate}">
+                    <div class="alert alert-info">licensePlate: ${licensePlate}</div>
+                </c:if>
+                <c:if test="${not empty brand}">
+                    <div class="alert alert-info">brand: ${brand}</div>
+                </c:if>
+                <c:if test="${not empty model}">
+                    <div class="alert alert-info">model: ${model}</div>
+                </c:if>
+                <c:if test="${not empty color}">
+                    <div class="alert alert-info">color: ${color}</div>
+                </c:if>
+                <c:if test="${not empty parkingSpot}">
+                    <div class="alert alert-info">parkingSpot: ${parkingSpot}</div>
+                </c:if>
+                <c:if test="${not empty owner_id}">
+                    <div class="alert alert-info">owner_id: ${owner_id}</div>
+                </c:if>
             </div>
         </div>
     </div>
 </t:pageTemplate>
-<html>
-<head>
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>

@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
+import java.util.logging.Logger;
 
 import java.io.IOException;
 import java.util.List;
@@ -35,9 +36,9 @@ public class AddCar extends HttpServlet {
                 response);
     }
 
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Retrieve parameters
-        Long id = Long.parseLong(request.getParameter("id"));
         String licensePlate = request.getParameter("licensePlate");
         String brand = request.getParameter("brand");
         String model = request.getParameter("model");
@@ -45,26 +46,38 @@ public class AddCar extends HttpServlet {
         String parkingSpot = request.getParameter("parkingSpot");
         String ownerIdStr = request.getParameter("owner_id");
 
+        // Set parameters as request attributes
+        request.setAttribute("licensePlate", licensePlate);
+        request.setAttribute("brand", brand);
+        request.setAttribute("model", model);
+        request.setAttribute("color", color);
+        request.setAttribute("parkingSpot", parkingSpot);
+        request.setAttribute("owner_id", ownerIdStr);
+
+        // Check for missing fields
+        if (licensePlate == null || brand == null || model == null || color == null || parkingSpot == null || ownerIdStr == null || ownerIdStr.isEmpty()) {
+            request.setAttribute("error", "All fields are required.");
+            doGet(request, response);
+            return;
+        }
+
         try {
             Long ownerId = Long.parseLong(ownerIdStr);
 
             // Create the car
-            carsBean.createCar(id, licensePlate, brand, model, color, parkingSpot, ownerId);
+            carsBean.createCar(licensePlate, brand, model, color, parkingSpot, ownerId);
 
             // Redirect to success page or list of cars
             response.sendRedirect(request.getContextPath() + "/cars");
 
         } catch (NumberFormatException e) {
-            // Handle invalid owner_id
-            request.setAttribute("error", "Invalid owner ID.");
+            request.setAttribute("error", "Invalid number format: " + e.getMessage());
             doGet(request, response);
         } catch (Exception e) {
-            // Handle general errors
             request.setAttribute("error", "An error occurred while adding the car.");
             doGet(request, response);
         }
     }
-
     @Override
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String carIdStr = request.getParameter("car_id");
@@ -94,6 +107,10 @@ public class AddCar extends HttpServlet {
         } catch (NumberFormatException e) {
             // Handle invalid car_id
             request.setAttribute("error", "Invalid car ID.");
+            doGet(request, response);
+        } catch (Exception e) {
+            // Handle general errors
+            request.setAttribute("error", "An error occurred while updating the car.");
             doGet(request, response);
         }
     }

@@ -2,6 +2,7 @@ package com.parking.demo;
 
 import com.parking.demo.common.CarsDto;
 import com.parking.demo.ejb.CarsBean;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -19,7 +20,9 @@ public class CarsServlet extends HttpServlet {
     @Inject
     CarsBean carsBean;
 
+
     @Override
+    @RolesAllowed("READ_CARS")
     protected void doGet(HttpServletRequest request, HttpServletResponse
             response) throws ServletException, IOException {
         List<CarsDto> cars = carsBean.findAllCars();
@@ -30,23 +33,9 @@ public class CarsServlet extends HttpServlet {
     }
 
     @Override
+    @RolesAllowed("WRITE_CARS")
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-       String[] carIdsAsString = request.getParameterValues("car_id");
-        try {
-            for (String carIdStr : carIdsAsString) {
-                Long carId = Long.parseLong(carIdStr);
-                carsBean.deleteCarsById(carId);
-            }
-            response.sendRedirect(request.getContextPath() + "/cars");
-        } catch (NumberFormatException e) {
-            // Handle invalid car_id
-            request.setAttribute("error", "Invalid car ID.");
-            doGet(request, response);
-        } catch (Exception e) {
-            // Handle general errors
-            request.setAttribute("error", "An error occurred while deleting the car.");
-            doGet(request, response);
-        }
+
     }
 
     @Override
