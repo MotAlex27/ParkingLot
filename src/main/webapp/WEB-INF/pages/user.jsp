@@ -18,6 +18,7 @@
                     <tr>
                         <th>Username</th>
                         <th>Email</th>
+                        <th>Age</th>
                         <th>Actions</th>
                     </tr>
                     </thead>
@@ -34,6 +35,7 @@
                         <tr>
                             <td>${user.username}</td>
                             <td>${user.email}</td>
+                            <td>${user.age}</td>
 
                             <td>
                                 <a href="${pageContext.request.contextPath}/users/edit/${user.username}">Edit</a>

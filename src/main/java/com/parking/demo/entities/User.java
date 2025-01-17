@@ -23,11 +23,23 @@ public class User {
     @Column(name = "username", nullable = false, unique = true)
     private String username;
 
+    @Column(name = "age", nullable = false, unique = false)
+    private int age;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Collection<UserGroup> groups = new ArrayList<>();
 
+
     @OneToMany(mappedBy = "owner")
     private Collection<Car> cars = new ArrayList<>();
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
 
     public Long getId() {
         return id;

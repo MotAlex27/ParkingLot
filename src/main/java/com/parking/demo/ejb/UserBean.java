@@ -8,6 +8,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 
 import java.util.List;
+import java.util.Random;
 
 @Stateless
 public class UserBean {
@@ -17,7 +18,7 @@ public class UserBean {
     public List<UserDto> findAllUsers() {
         try {
             return em.createQuery("SELECT new com.parking.demo.common.UserDto" +
-                    "(u.username, u.password, u.email,u.id)" +
+                    "(u.username, u.password, u.email,u.id,u.age)" +
                     " FROM User u", UserDto.class).getResultList();
         } catch (Exception e) {
             e.printStackTrace();
@@ -27,11 +28,15 @@ public class UserBean {
 
     public void createUser(String username, String email, String password, List<String> roles) {
         try {
-            // Create and persist the user entity
+            Random random = new Random();
+            int randomNumber = random.nextInt(83) + 18;
+            // Create and persist the user
+            // entity
             User user = new User();
             user.setUsername(username);
             user.setEmail(email);
-            user.setPassword(hashPassword(password)); // Password should be hashed
+            user.setPassword(hashPassword(password));
+            user.setAge(randomNumber);
             em.persist(user);
 
             // Create and persist associated user groups

@@ -31,7 +31,7 @@ public class AddUserServlet extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         String[] userGroups = request.getParameterValues("user_groups");
-
+        String age = request.getParameter("age");
         if (userGroups == null) {
             userGroups = new String[0]; // Handle case where no roles are selected
         }

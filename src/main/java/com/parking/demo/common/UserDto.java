@@ -5,8 +5,25 @@ public class UserDto {
     private String password;
     private String email;
     private Long id;
+    private int age;
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
 
     public UserDto() {
+    }
+
+    public UserDto(String username, String password,
+                   String email,long id, int age) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.age = age;
     }
 
     public UserDto(String username, String password,
